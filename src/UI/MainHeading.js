@@ -8,7 +8,7 @@ const MainHeading = (props) => {
     // color={"#674de5"}
     <React.Fragment>
       <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
-        <Heading as="h1" fontSize={"28px"}>
+        <Heading as="h1" fontSize={{ base: "24px", md: "28px" }}>
           {mainContent}
         </Heading>
         <Heading
