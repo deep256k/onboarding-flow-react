@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Heading, Image } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import PersonalInfo from "./components/PersonalInfo";
+import Preference from "./components/Preference";
+import Stepper from "./components/Stepper";
+import Success from "./components/Success";
+import WorkSpace from "./components/WorkSpace";
+import StepperContext from "./Context/StepperContext";
+import Layout from "./UI/Layout";
+import logo from "./Images/cut-short.jpeg";
 
 function App() {
+  const stepperCtx = useContext(StepperContext);
+
+  const displayStep = (step) => {
+    switch (step) {
+      case 0:
+        return <PersonalInfo />;
+      case 1:
+        return <WorkSpace></WorkSpace>;
+      case 2:
+        return <Preference></Preference>;
+      case 3:
+        return <Success></Success>;
+      default:
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Layout>
+        <Box display={"flex"} justifyContent="space-around">
+          <Box mb={"3rem"} display={"flex"} alignItems={"center"}>
+            <Box>
+              <Image boxSize="30px" src={logo} alt="logo"></Image>
+            </Box>
+            <Heading>Eden</Heading>
+          </Box>
+        </Box>
+        <Stepper
+          steps={stepperCtx.stepperState}
+          currentStep={stepperCtx.currentStep}
+        ></Stepper>
+        {displayStep(stepperCtx.currentStep)}
+      </Layout>
+    </React.Fragment>
   );
 }
 
